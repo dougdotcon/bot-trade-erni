@@ -1,90 +1,90 @@
-# Bot de Trading Crypto
+# BotTradeErni
 
-Este projeto consiste em dois componentes principais:
+A robust, two-component cryptocurrency trading automation system designed for monitoring signals and executing trades via WebSocket and API integration.
 
-1. **Crypto Seeker** (`crypto_seeker.py`): Responsável por monitorar e processar sinais de trading.
-2. **Operation Bot** (`operation_bot.py`): Executa as operações de trading com base nos sinais recebidos.
+## Architecture
 
-## Requisitos
+The project consists of two independent services:
+
+1. **Crypto Seeker** (`crypto_seeker.py`): Connects to a WebSocket server to monitor, process, and persist incoming trading signals.
+2. **Operation Bot** (`operation_bot.py`): Acts as an execution engine, providing a REST API to receive signals and perform trading operations on the configured exchange.
+
+## Prerequisites
 
 - Python 3.8+
-- Pip (gerenciador de pacotes Python)
+- Pip (Python package manager)
 
-## Instalação
+## Installation
 
-1. Clone o repositório
-2. Instale as dependências:
-```bash
+1. Clone the repository.
+2. Install the required dependencies:
+
+bash
 pip install -r requirements.txt
-```
 
-## Configuração
 
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+## Configuration
 
-```env
-WS_SIGNAL=ws://seu-websocket-server
+Create a `.env` file in the root directory of the project with the following environment variables:
+
+env
+WS_SIGNAL=ws://your-websocket-server
 EXCHANGE_ID=binance
-API_KEY=sua-api-key
-API_SECRET=seu-api-secret
+API_KEY=your-api-key
+API_SECRET=your-api-secret
 PORT=5000
-```
 
-## Uso
 
-### Iniciando o Crypto Seeker
+## Usage
 
-```bash
+### Starting the Crypto Seeker
+
+The Crypto Seeker connects to the specified WebSocket endpoint and logs incoming signals.
+
+bash
 python crypto_seeker.py
-```
 
-O Crypto Seeker irá:
-- Conectar ao WebSocket especificado
-- Monitorar sinais de trading
-- Processar e salvar os sinais recebidos
 
-### Iniciando o Operation Bot
+### Starting the Operation Bot
 
-```bash
+The Operation Bot initializes a Flask web server to handle trade execution requests.
+
+bash
 python operation_bot.py
-```
 
-O Operation Bot irá:
-- Iniciar um servidor Flask na porta especificada
-- Expor endpoints para receber sinais e verificar status
-- Executar operações de trading baseadas nos sinais recebidos
 
-### Endpoints do Operation Bot
+### Operation Bot Endpoints
 
-- `POST /webhook`: Recebe sinais de trading
-- `GET /api/botStatus`: Retorna o status atual do bot
+- `POST /webhook`: Receives and processes trading signals.
+- `GET /api/botStatus`: Returns the current health and status of the bot.
 
-## Estrutura do Projeto
+## Project Structure
 
-```
-├── crypto_seeker.py     # Script do monitor de sinais
-├── operation_bot.py     # Script do bot de operações
-├── requirements.txt     # Dependências do projeto
-└── .env                # Configurações (criar manualmente)
-```
 
-## Logs
+.
+├── crypto_seeker.py     # Signal monitoring script
+├── operation_bot.py     # Trade execution script
+├── requirements.txt     # Python dependencies
+└── .env                # Configuration file (create manually)
 
-Os logs são salvos no formato:
-```
-YYYY-MM-DD HH:MM:SS - LEVEL - Mensagem
-```
 
-## Segurança
+## Logging
 
-- Nunca compartilhe suas chaves API
-- Mantenha o arquivo .env seguro
-- Use apenas em redes seguras
+Logs are saved in the following format:
 
-## Contribuição
+YYYY-MM-DD HH:MM:SS - LEVEL - Message
 
-Sinta-se à vontade para contribuir com melhorias através de Pull Requests.
 
-## Licença
+## Security
 
-MIT 
+- **Never** share your API keys or secrets.
+- Keep the `.env` file out of version control (e.g., add to `.gitignore`).
+- Ensure the environment is secure when running the bot.
+
+## Contributing
+
+Contributions are welcome. Please submit Pull Requests for any improvements.
+
+## License
+
+MIT
